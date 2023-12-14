@@ -1,0 +1,29 @@
+### 전체 조회
+GET http://localhost:8080/api/user/getAll
+
+### ID로 조회
+GET http://localhost:8080/api/user/get/3
+
+
+### 생성
+POST http://localhost:8080/api/user/post
+Content-Type: application/json
+
+{
+  "name" : "test22",
+  "availableAmount" : 300000
+}
+
+
+### 수정
+PUT http://localhost:8080/api/user/put
+Content-Type: application/json
+
+{
+  "id" : 3,
+  "availableAmount" : 100000
+}
+
+
+### ID로 삭제
+DELETE http://localhost:8080/api/user/delete/2

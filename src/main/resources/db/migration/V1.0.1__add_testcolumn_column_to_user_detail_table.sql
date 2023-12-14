@@ -1,0 +1,1 @@
+alter table user_detail add testcolumn bigint(10);

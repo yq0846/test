@@ -1,0 +1,67 @@
+### 0. 사용자 데이터 생성
+POST http://localhost:8080/api/user/post
+Content-Type: application/json
+
+{
+  "name" : "testUser",
+  "availableAmount" : 25000
+}
+
+
+### 1. 가맹점 1만원 결제 요청 생성
+POST http://localhost:8080/api/payment/post
+Content-Type: application/json
+
+{
+  "userId" : 1,
+  "franchiseName" : "test11",
+  "paymentAmount" : 10000,
+  "paymentStatus" : "N"
+}
+
+
+### 2. 사용자 ID로 결제 요청 건 조회
+GET http://localhost:8080/api/payment/get/1
+
+
+### 3. 해당 결제 요청에 대한 결제 (1회 시도 성공, 2회 시도 실패(이미 완료된 건입니다.))
+PUT http://localhost:8080/api/user/facam-put/1,1
+
+
+
+### 4. 가맹점 2만원 결제 요청 생성
+POST http://localhost:8080/api/payment/post
+Content-Type: application/json
+
+{
+  "userId" : 1,
+  "franchiseName" : "test22",
+  "paymentAmount" : 20000,
+  "paymentStatus" : "N"
+}
+
+### 5. 해당 결제 요청에 대한 결제 (실패 (잔액이 부족합니다.))
+PUT http://localhost:8080/api/user/facam-put/2,1
+
+
+### 6. 보유 요금 충전
+PUT http://localhost:8080/api/user/put
+Content-Type: application/json
+
+{
+  "id" : 1,
+  "availableAmount" : 100000
+}
+
+
+### 7. 두번째 결제 요청에 대한 결제 (성공)
+PUT http://localhost:8080/api/user/facam-put/2,1
+
+
+
+### 결제 요청 내역 삭제
+DELETE http://localhost:8080/api/payment/deleteAll
+
+
+### 사용자 삭제
+DELETE http://localhost:8080/api/user/delete/1
